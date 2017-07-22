@@ -35,7 +35,7 @@ ext {
     gsonConverterVersion = '2.1.0'
     okhttpVersion = '3.8.0'
     picassoVersion = '2.5.2'
-    archVersion = '1.0.0-alpha1'
+    archVersion = '1.0.0-alpha5'
 
     kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     databindingCompiler = "com.android.databinding:compiler:$pluginVersion"
