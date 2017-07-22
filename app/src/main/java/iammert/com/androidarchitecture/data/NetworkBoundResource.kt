@@ -16,8 +16,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constru
         value = Resource.loading(null)
     }
 
-    init {
-        val dbSource = lazy { loadFromDb() }.value
+    @get:Synchronized
+    val asLiveData: LiveData<Resource<ResultType>> by lazy {
+        val dbSource = loadFromDb()
 
         result.addSource(dbSource, {
             result.removeSource(dbSource)
@@ -28,6 +29,8 @@ abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constru
                 fetchFromDb(dbSource)
             }
         })
+
+        result
     }
 
     private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
@@ -83,7 +86,5 @@ abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constru
 
     @MainThread
     fun shouldFetchData(resultType: ResultType?): Boolean = true
-
-    fun asLiveData(): LiveData<Resource<ResultType>> = result
 
 }
