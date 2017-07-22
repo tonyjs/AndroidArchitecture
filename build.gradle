@@ -40,9 +40,6 @@ ext {
     kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     databindingCompiler = "com.android.databinding:compiler:$pluginVersion"
 
-    kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    databindingCompiler = "com.android.databinding:compiler:$pluginVersion"
-
     supportLibAppCompat = "com.android.support:appcompat-v7:$supportLibVersion"
     supportLibDesign = "com.android.support:design:$supportLibVersion"
     archRuntime = "android.arch.lifecycle:runtime:$archVersion"
