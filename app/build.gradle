@@ -29,6 +29,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kapt {
+        generateStubs = true
+    }
+
 }
 
 dependencies {
@@ -69,7 +73,6 @@ dependencies {
 
     //ui
     compile rootProject.ext.picasso
-
 }
 repositories {
     mavenCentral()
