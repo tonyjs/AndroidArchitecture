@@ -6,6 +6,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import iammert.com.androidarchitecture.data.local.entity.MovieEntity
+import io.reactivex.Flowable
 
 @Dao
 interface MovieDao {
@@ -18,5 +19,8 @@ interface MovieDao {
 
     @Query("SELECT * FROM movies WHERE id=:id")
     fun getMovie(id: Int): LiveData<MovieEntity>
+
+    @Query("SELECT * FROM movies")
+    fun loadMoviesByRx(): Flowable<List<MovieEntity>>
 
 }

@@ -26,7 +26,7 @@ class MovieRepository
                 return movieDBService.loadMovies()
             }
 
-        }.asLiveData()
+        }.asLiveData
     }
 
     fun getMovie(id: Int): LiveData<MovieEntity> = movieDao.getMovie(id)

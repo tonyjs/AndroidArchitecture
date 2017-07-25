@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,19 +20,12 @@ import iammert.com.androidarchitecture.ui.BaseAdapter;
 
 public class MovieListAdapter extends BaseAdapter<MovieListAdapter.MovieViewHolder, MovieEntity> {
 
-    private List<MovieEntity> movieEntities;
-
     private final MovieListCallback movieListCallback;
+    private List<MovieEntity> movieEntities;
 
     public MovieListAdapter(@NonNull MovieListCallback movieListCallback) {
         movieEntities = new ArrayList<>();
         this.movieListCallback = movieListCallback;
-    }
-
-    @Override
-    public void setData(List<MovieEntity> movieEntities) {
-        this.movieEntities = movieEntities;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -48,12 +43,13 @@ public class MovieListAdapter extends BaseAdapter<MovieListAdapter.MovieViewHold
         return movieEntities.size();
     }
 
-    static class MovieViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void setData(@NotNull List<MovieEntity> movieEntities) {
+        this.movieEntities = movieEntities;
+        notifyDataSetChanged();
+    }
 
-        public static MovieViewHolder create(LayoutInflater inflater, ViewGroup parent, MovieListCallback callback) {
-            ItemMovieListBinding itemMovieListBinding = ItemMovieListBinding.inflate(inflater, parent, false);
-            return new MovieViewHolder(itemMovieListBinding, callback);
-        }
+    static class MovieViewHolder extends RecyclerView.ViewHolder {
 
         ItemMovieListBinding binding;
 
@@ -62,6 +58,11 @@ public class MovieListAdapter extends BaseAdapter<MovieListAdapter.MovieViewHold
             this.binding = binding;
             binding.getRoot().setOnClickListener(v ->
                     callback.onMovieClicked(binding.getMovie(), binding.imageViewCover));
+        }
+
+        public static MovieViewHolder create(LayoutInflater inflater, ViewGroup parent, MovieListCallback callback) {
+            ItemMovieListBinding itemMovieListBinding = ItemMovieListBinding.inflate(inflater, parent, false);
+            return new MovieViewHolder(itemMovieListBinding, callback);
         }
 
         public void onBind(MovieEntity movieEntity) {
